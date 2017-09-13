@@ -396,7 +396,7 @@ spinel_datatype_vunpack_(const uint8_t *data_ptr, spinel_size_t data_len, const 
             const char **arg_ptr = va_arg(args->obj, const char **);
             size_t len = strnlen((const char *)data_ptr, data_len) + 1;
 
-            require_action((len <= data_len) || (data_ptr[data_len - 1] != 0), bail, (ret = -1, errno = EOVERFLOW));
+			require_action((len <= data_len) || (data_len>0 && data_ptr[data_len - 1] != 0), bail, (ret = -1, errno = EOVERFLOW));
 
             if (arg_ptr)
             {
